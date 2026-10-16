@@ -1,6 +1,6 @@
 # Telecom Customer Churn: who leaves, why, and what it costs
 
-**Live dashboard:** [https://YOUR-APP-NAME.streamlit.app]([https://YOUR-APP-NAME.streamlit.app](https://telco-churn-analysis-28dymgzzbudhymzykhpyh7.streamlit.app/))
+**Live dashboard:** [https://telco-churn-analysis-28dymgzzbudhy.streamlit.app](https://telco-churn-analysis-28dymgzzbudhy.streamlit.app)
 
 A telecom provider lost 26.5% of its customers (1,869 of 7,043). This project asks which customers are leaving, what they have in common, and where a retention team should spend its effort first. It covers the full path from raw data to a recommendation: cleaning, SQL, statistical testing, a churn-risk model and an interactive dashboard.
 
