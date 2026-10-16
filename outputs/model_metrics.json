@@ -1,0 +1,19 @@
+{
+  "majority_class_baseline_accuracy": 0.735,
+  "Logistic regression": {
+    "test_roc_auc": 0.839,
+    "cv_roc_auc_mean": 0.843,
+    "cv_roc_auc_std": 0.014,
+    "accuracy": 0.74,
+    "precision_churn": 0.507,
+    "recall_churn": 0.773
+  },
+  "Random forest": {
+    "test_roc_auc": 0.839,
+    "cv_roc_auc_mean": 0.842,
+    "cv_roc_auc_std": 0.013,
+    "accuracy": 0.754,
+    "precision_churn": 0.526,
+    "recall_churn": 0.759
+  }
+}

@@ -1,0 +1,5 @@
+PaymentMethod,auto_pay,customers,churn_rate_pct,avg_monthly_charge
+Electronic check,No,2365,45.3,76.26
+Mailed check,No,1612,19.1,43.92
+Bank transfer (automatic),Yes,1544,16.7,67.19
+Credit card (automatic),Yes,1522,15.2,66.51

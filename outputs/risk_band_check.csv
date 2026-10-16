@@ -1,0 +1,4 @@
+risk_band,customers,actual_churn_rate
+High,1750,0.624
+Low,3382,0.064
+Medium,1911,0.293

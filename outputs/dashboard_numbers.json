@@ -1,0 +1,10 @@
+{
+  "customers": 7043,
+  "churned": 1869,
+  "churn_rate_pct": 26.5,
+  "monthly_revenue_lost": 139131.0,
+  "pct_of_monthly_charges": 30.5,
+  "active_high_risk_customers": 658,
+  "active_high_risk_monthly_charges": 51333.0,
+  "active_high_risk_expected_monthly_loss": 39388.0
+}

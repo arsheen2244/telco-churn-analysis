@@ -1,0 +1,14 @@
+{
+  "segment_customers": 833,
+  "segment_churned": 592,
+  "segment_churn_rate": 0.711,
+  "assumed_relative_churn_reduction": 0.1,
+  "customers_retained": 59.2,
+  "monthly_revenue_retained": 4849.0,
+  "annualised_revenue_retained": 58188.0,
+  "holdout_check": {
+    "segment_customers_in_test": 172,
+    "segment_churn_rate_in_test": 0.686,
+    "rest_churn_rate_in_test": 0.207
+  }
+}

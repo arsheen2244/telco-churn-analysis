@@ -1,0 +1,5 @@
+tenure_band,customers,churned,churn_rate_pct,share_of_all_churners_pct
+0-12 mo,2186,1037,47.4,55.5
+13-24 mo,1024,294,28.7,15.7
+25-48 mo,1594,325,20.4,17.4
+49-72 mo,2239,213,9.5,11.4

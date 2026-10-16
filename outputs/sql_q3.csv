@@ -1,0 +1,9 @@
+InternetService,TechSupport,OnlineSecurity,customers,churn_rate_pct
+Fiber optic,No,No,1765,55.0
+DSL,No,No,788,35.4
+Fiber optic,Yes,No,492,29.1
+Fiber optic,No,Yes,465,28.0
+DSL,Yes,No,453,15.0
+DSL,No,Yes,455,14.5
+Fiber optic,Yes,Yes,374,14.2
+DSL,Yes,Yes,725,6.3

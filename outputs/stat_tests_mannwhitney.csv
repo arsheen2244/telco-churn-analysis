@@ -1,0 +1,3 @@
+variable,median_churned,median_stayed,p_value
+tenure,10.0,38.0,2.419635517951866e-208
+MonthlyCharges,79.65,64.42500000000001,3.311627651988585e-54
