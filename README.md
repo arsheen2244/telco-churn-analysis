@@ -1,10 +1,28 @@
-# Telecom Customer Churn: who leaves, why, and what it costs
+<div align="center">
 
-**Live dashboard:** [https://telco-churn-analysis-28dymgzzbudhy.streamlit.app](https://telco-churn-analysis-28dymgzzbudhy.streamlit.app)
+# 📉 Telecom Customer Churn
+
+**Who leaves, why, and what it costs: from raw data to a churn‑risk model and a retention plan.**
+
+[![Live dashboard](https://img.shields.io/badge/Live%20dashboard-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://telco-churn-analysis-28dymgzzbudhy.streamlit.app)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-SQLite-003B57?logo=sqlite&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?logo=scipy&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power%20BI-dataset-F2C811?logo=powerbi&logoColor=black)
+![ROC-AUC](https://img.shields.io/badge/ROC--AUC-0.84-2ea44f)
+
+</div>
+
+---
+
+| 👥 Customers | 🚪 Churned | 🎯 Model ROC‑AUC | 🔥 High‑risk segment churn | 💸 Monthly charges lost |
+|:---:|:---:|:---:|:---:|:---:|
+| **7,043** | **1,869 (26.5%)** | **0.84** | **71.1%** | **$139K** |
+
 
 A telecom provider lost 26.5% of its customers (1,869 of 7,043). This project asks which customers are leaving, what they have in common, and where a retention team should spend its effort first. It covers the full path from raw data to a recommendation: cleaning, SQL, statistical testing, a churn-risk model and an interactive dashboard.
 
-**Tools:** Python (pandas, SciPy, scikit-learn) · SQL (SQLite) · Streamlit
 
 ![Who churns](docs/screenshots/01_who_churns.png)
 
@@ -25,6 +43,14 @@ A telecom provider lost 26.5% of its customers (1,869 of 7,043). This project as
 | 5 | **Gender is irrelevant** (p = 0.49), which is a useful negative control: the tests are not flagging everything. | Chi-square on gender |
 
 **The high-risk segment.** Month-to-month + fibre + no tech support + first year: 833 customers (12% of the base) who churn at **71.1%**, versus 20.6% for everyone else. They make up 31.7% of all churners and $48.5K of the $139K in monthly charges lost to churn. On the 20% hold-out split the same segment churns at 68.6% (172 customers) vs 20.7% for the rest. The rule was defined after exploring the full data, so treat this as a consistency check rather than a clean out-of-sample test.
+
+```mermaid
+xychart-beta
+    title "Churn rate by contract type (%)"
+    x-axis ["Month-to-month", "One year", "Two year"]
+    y-axis "Churn %" 0 --> 50
+    bar [42.7, 11.3, 2.8]
+```
 
 ## Interactive dashboard
 
@@ -49,6 +75,45 @@ The Streamlit app reads the pre-computed files in `outputs/`, so nothing is retr
 3. **Run it as an A/B test, not a rollout.** The add-on and payment gaps are associations in a one-time snapshot. They may partly reflect who chooses those options, so an experiment is needed before claiming the offer causes retention.
 
 **Rough size of the prize:** cutting churn in the high-risk segment by a tenth (a relative 10% reduction, about 59 customers) would protect roughly **$4.8K of monthly billing, about $58K a year**. This is a scenario, not a measured result: it assumes the retained customers stay for 12 months at today's charges and ignores the cost of the offer. The dataset does not state a currency, so $ is assumed. The dashboard's slider lets you change the 10% assumption.
+
+## 🏗️ Pipeline
+
+```mermaid
+flowchart LR
+    RAW[(telco_raw.csv<br/>IBM sample · 7,043 rows)] --> C["01_clean.py<br/>fix blanks · collapse flags ·<br/>tenure bands · add‑on counts"]
+    C --> CL[(telco_clean.csv)]
+    CL --> SQL["02_run_sql.py<br/>SQLite · 6 business questions<br/>CTE + window functions"]
+    CL --> ST["03_stats_and_model.py<br/>χ² + Cramér's V · Mann‑Whitney U<br/>LogReg vs Random Forest · 5‑fold CV"]
+    SQL --> OUT[["outputs/<br/>CSV · JSON · risk scores"]]
+    ST --> OUT
+    OUT --> APP["app.py<br/>Streamlit dashboard"]
+    OUT --> PBI["powerbi_dataset.csv<br/>+ build guide"]
+    APP --> U([👩‍💼 Retention team])
+```
+
+```mermaid
+flowchart TB
+    S["All customers"] --> M{"Month‑to‑month?"}
+    M -- yes --> F{"Fibre optic?"}
+    F -- yes --> T{"No tech support?"}
+    T -- yes --> Y{"Tenure ≤ 12 months?"}
+    Y -- yes --> H["🔥 High‑risk segment<br/>833 customers · 12% of base<br/>churn 71.1% · 31.7% of churners"]
+    M -- no --> R["Everyone else<br/>churn 20.6%"]
+    F -- no --> R
+    T -- no --> R
+    Y -- no --> R
+```
+
+## 🧰 Tech stack
+
+| Layer | Tools |
+|------|-------|
+| Cleaning & features | Python, pandas, NumPy |
+| SQL analysis | SQLite (aggregation, `CASE`, CTE, window functions) |
+| Statistics | SciPy: chi‑square + Cramér's V, Mann‑Whitney U |
+| Modelling | scikit‑learn: Logistic Regression, Random Forest, stratified CV, permutation importance |
+| Visualisation | matplotlib, Streamlit (interactive, deployed), Power BI dataset + guide |
+| Automation | `run_all.sh` runs the whole pipeline in one command |
 
 ## Approach
 
